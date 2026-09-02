@@ -11,7 +11,7 @@
 - 支持图片上传与流式对话
 - 基于 LangChain + LangGraph 构建的 Agent
 
-### 2. 智能万年历 (`calendar.py`)
+### 2. 智能万年历 (`calendar_app.py`)
 - 农历/节气/节日/星座查询
 - 实时天气查询（基于 wttr.in API）
 - AI 日历助手问答（支持 OpenAI 兼容 API）
@@ -22,7 +22,7 @@
 kitchen_agent/
 ├── app.py               # 统一入口（侧边栏切换两个应用）
 ├── main.py              # AI 厨房助手 Streamlit 应用
-├── calendar.py          # 智能万年历 Streamlit 应用
+├── calendar_app.py      # 智能万年历 Streamlit 应用
 ├── test.py              # Agent 工具链测试
 ├── utils/
 │   ├── __init__.py
@@ -47,8 +47,8 @@ uv sync
 uv run streamlit run app.py
 
 # 或单独运行各应用
-uv run streamlit run main.py        # AI 厨房助手
-uv run streamlit run calendar.py    # 智能万年历
+uv run streamlit run main.py            # AI 厨房助手
+uv run streamlit run calendar_app.py    # 智能万年历
 ```
 
 > 统一入口 `app.py` 通过左侧侧边栏在两个应用间切换。

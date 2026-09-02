@@ -1,6 +1,8 @@
 """统一入口 UI：整合 AI 厨房助手与智能万年历。"""
 import streamlit as st
-from pathlib import Path
+
+from main import run_app as run_kitchen_app
+from calendar_app import run_app as run_calendar_app
 
 st.set_page_config(page_title="AI 智能助手", page_icon="🤖", layout="centered")
 
@@ -31,8 +33,6 @@ if app == "🏠 主页":
     st.divider()
     st.info("请在左侧选择要使用的应用。")
 elif app == "🍳 AI 厨房助手":
-    code = Path(__file__).parent.joinpath("main.py").read_text(encoding="utf-8")
-    exec(compile(code, "main.py", "exec"), {"__name__": "__main__", "__file__": str(Path(__file__).parent / "main.py")})
+    run_kitchen_app()
 elif app == "📅 智能万年历":
-    code = Path(__file__).parent.joinpath("calendar.py").read_text(encoding="utf-8")
-    exec(compile(code, "calendar.py", "exec"), {"__name__": "__main__", "__file__": str(Path(__file__).parent / "calendar.py")})
+    run_calendar_app()
