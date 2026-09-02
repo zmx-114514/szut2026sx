@@ -1,0 +1,157 @@
+# ============================================================
+# 禁止上传清单（.gitignore）
+# 本文件列出严禁提交到本仓库的所有内容
+# 任何包含以下特征的文件均不得推送
+# ============================================================
+
+# ---------- 一、个人隐私信息 ----------
+# 严禁上传任何含个人身份信息的文档
+*身份证*
+*学生证*
+*银行卡*
+*成绩单*
+*家庭住址*
+*手机号*
+*学号*
+*.id
+**/id_card*
+**/personal_info*
+**/private*
+
+# ---------- 二、密钥与凭证 ----------
+# 严禁泄露密钥、Token、环境变量
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.keystore
+*.token
+**/credentials*
+**/secrets*
+**/config/local*
+
+# ---------- 三、敏感与机密文档 ----------
+# 严禁上传学校内部资料、考试题库、企业机密等
+*考试*
+*题库*
+*答案*
+*内部资料*
+*机密*
+*保密*
+
+# ---------- 四、Office 等非源码文档 ----------
+# 严禁上传 Word/Excel/PPT/PDF 等非源码文档
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+*.pdf
+*.wps
+*.et
+*.dps
+
+# ---------- 五、大型二进制与压缩包 ----------
+# 严禁上传可执行程序、安装包、压缩包、镜像
+*.exe
+*.msi
+*.apk
+*.dmg
+*.deb
+*.rpm
+*.app
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar
+*.tar.gz
+*.iso
+*.img
+
+# ---------- 六、数据库文件 ----------
+# 严禁上传数据库文件（含可能的隐私数据）
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+*.sql
+
+# ---------- 七、媒体文件 ----------
+# 严禁上传音视频、图片等大体积非必需文件
+*.mp4
+*.mp3
+*.avi
+*.mov
+*.flv
+*.mkv
+*.wav
+*.flac
+*.ogg
+*.bmp
+*.psd
+*.ai
+
+# ---------- 八、Python 编译产物 ----------
+# 严禁上传编译缓存、打包产物
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+build/
+dist/
+*.whl
+
+# ---------- 九、虚拟环境 ----------
+# 严禁上传虚拟环境目录
+.venv/
+venv/
+env/
+ENV/
+pythonenv*/
+
+# ---------- 十、测试与覆盖率缓存 ----------
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+
+# ---------- 十一、IDE / 编辑器配置 ----------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ---------- 十二、日志与临时文件 ----------
+*.log
+logs/
+*.tmp
+*.bak
+*.cache
+*.old
+
+# ---------- 十三、系统文件 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+*.lnk
+
+# ---------- 十四、项目特定禁止项 ----------
+kitchen_agent/.env
+kitchen_agent/utils/__pycache__/
+kitchen_agent/**/__pycache__/
+kitchen_agent/**/*.pyc
