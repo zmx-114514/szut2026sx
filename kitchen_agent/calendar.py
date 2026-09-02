@@ -53,7 +53,6 @@ def get_weather(city="北京"):
         return f"获取天气失败：{e}"
 
 
-st.set_page_config(page_title="📅 智能万年历", layout="centered")
 st.title("📅 智能万年历（农历 · 节日 · 星座 · 天气 · AI 助手）")
 
 # ---------- 初始化会话状态 ----------

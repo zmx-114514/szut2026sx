@@ -20,6 +20,7 @@
 
 ```
 kitchen_agent/
+├── app.py               # 统一入口（侧边栏切换两个应用）
 ├── main.py              # AI 厨房助手 Streamlit 应用
 ├── calendar.py          # 智能万年历 Streamlit 应用
 ├── test.py              # Agent 工具链测试
@@ -42,12 +43,15 @@ kitchen_agent/
 # 安装依赖
 uv sync
 
-# 运行 AI 厨房助手
-uv run streamlit run main.py
+# 运行统一入口（推荐）
+uv run streamlit run app.py
 
-# 运行智能万年历
-uv run streamlit run calendar.py
+# 或单独运行各应用
+uv run streamlit run main.py        # AI 厨房助手
+uv run streamlit run calendar.py    # 智能万年历
 ```
+
+> 统一入口 `app.py` 通过左侧侧边栏在两个应用间切换。
 
 ## 环境变量
 
