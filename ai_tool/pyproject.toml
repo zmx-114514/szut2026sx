@@ -1,7 +1,7 @@
 [project]
-name = "kitchen-agent"
+name = "ai-tool"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI 智能助手工具集：厨房助手、万年历、AI 伴侣"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -15,9 +15,6 @@ dependencies = [
     "requests>=2.34.2",
     "streamlit>=1.63.0",
 ]
-
-[project.scripts]
-kitchen-agent = "kitchen_agent:main"
 
 [[tool.uv.index]]
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"

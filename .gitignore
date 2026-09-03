@@ -151,7 +151,7 @@ ehthumbs.db
 *.lnk
 
 # ---------- 十四、项目特定禁止项 ----------
-kitchen_agent/.env
-kitchen_agent/utils/__pycache__/
-kitchen_agent/**/__pycache__/
-kitchen_agent/**/*.pyc
+ai_tool/.env
+ai_tool/utils/__pycache__/
+ai_tool/**/__pycache__/
+ai_tool/**/*.pyc
