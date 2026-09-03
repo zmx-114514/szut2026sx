@@ -30,8 +30,13 @@
 
 ```
 ai_tool/
-├── app.py               # 统一入口（侧边栏切换四个应用）
-├── main.py              # AI 厨房助手 Streamlit 应用
+├── app.py               # 主页（Streamlit Multipage App 入口）
+├── pages/               # 各应用页面（侧边栏自动导航）
+│   ├── 1_🍳_AI厨房助手.py
+│   ├── 2_📅_智能万年历.py
+│   ├── 3_💗_AI伴侣.py
+│   └── 4_🔍_看图搜索.py
+├── main.py              # AI 厨房助手应用逻辑
 ├── calendar_app.py      # 智能万年历 Streamlit 应用
 ├── companion_app.py     # AI 伴侣 Streamlit 应用
 ├── vision_app.py        # 看图搜索 Agent Streamlit 应用
@@ -58,17 +63,17 @@ ai_tool/
 # 安装依赖
 uv sync
 
-# 运行统一入口（推荐）
+# 运行主页（推荐，左侧侧边栏自动导航各应用）
 uv run streamlit run app.py
 
-# 或单独运行各应用
+# 或直接运行单个应用（独立窗口）
 uv run streamlit run main.py            # AI 厨房助手
 uv run streamlit run calendar_app.py    # 智能万年历
 uv run streamlit run companion_app.py   # AI 伴侣
 uv run streamlit run vision_app.py      # 看图搜索 Agent
 ```
 
-> 统一入口 `app.py` 通过左侧侧边栏在四个应用间切换。
+> 采用 Streamlit Multipage App 模式，`app.py` 为主页，`pages/` 目录下每个文件对应一个应用页面，左侧侧边栏自动生成导航链接。
 
 ## 环境变量
 

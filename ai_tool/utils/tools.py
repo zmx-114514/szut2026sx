@@ -73,4 +73,4 @@ def recognize_image_tool(image_url: str, question: str = "请详细描述这张�
 
 web_search = TavilySearch()
 
-tools = [get_current_date, get_weather, web_search]
+tools = [get_current_date, get_weather, web_search, recognize_image_tool]

@@ -8,11 +8,12 @@ import tempfile
 import streamlit as st
 from langchain_core.messages import AIMessage, ToolMessage
 
-from image_agent import agent
-
 
 def run_app():
     """看图 + 联网搜索 Agent 界面入口。"""
+    # 懒加载：仅在进入看图搜索页时构建 Agent，避免启动时开销
+    from image_agent import agent
+
     st.title("🔍 看图 + 联网搜索 Agent")
     st.caption("上传图片或输入图片 URL，agent 会看图并联网搜索相关知识")
 
