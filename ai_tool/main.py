@@ -29,7 +29,6 @@ def run_app():
         elif msg["role"] == "assistant":
             with st.chat_message('assistant'):
                 st.write(msg["content"])
-
     prompt = st.chat_input(
         "拍照或描述你的食材…",
         accept_file=True,
@@ -53,26 +52,28 @@ def run_app():
             if display_image:
                 st.image(display_image)
 
-        st.session_state.history.append({
-            "role": "user",
-            "content": {"text": input_text or "(图片)", "image": display_image}
-        })
-
         content = [{"type": "text", "text": input_text or "识别图片食材，搜索对应的食谱推荐"}]
         if image_name:
             image_url = upload_image(display_image, image_name)
             content.append({"type": "image_url", "image_url": {"url": image_url}})
 
+        # 历史记录存图床 URL 而非图片 bytes，避免 session_state 累积大量字节导致浏览器内存暴涨
+        st.session_state.history.append({
+            "role": "user",
+            "content": {"text": input_text or "(图片)", "image": image_url or display_image}
+        })
+
         stream = send_msg_stream(content, st.session_state.thread_id)
 
-        with st.chat_message('assistant'):
-            container = st.empty()
-            ai_reply = ""
+        def token_iter():
             for token, meta in stream:
                 if isinstance(token, AIMessageChunk) and token.content != "":
-                    ai_reply += token.content
-                    container.write(ai_reply)
-            st.session_state.history.append({"role": "assistant", "content": ai_reply})
+                    yield token.content
+
+        # st.write_stream 内置流式优化：过程中轻量更新，结束时仅渲染一次完整 markdown
+        with st.chat_message('assistant'):
+            ai_reply = st.write_stream(token_iter())
+        st.session_state.history.append({"role": "assistant", "content": ai_reply})
 
 
 if __name__ == "__main__":

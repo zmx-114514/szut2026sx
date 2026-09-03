@@ -138,12 +138,9 @@ def run_app():
         st.session_state.companion_messages.append({"role": "user", "content": user_input})
 
         messages = [system_prompt] + st.session_state.companion_messages
+        # st.write_stream 内置流式优化：过程中轻量更新，结束时仅渲染一次完整 markdown
         with st.chat_message("assistant", avatar=cfg["avatar"]):
-            container = st.empty()
-            reply = ""
-            for delta in stream_reply(messages, temperature):
-                reply += delta
-                container.write(reply)
+            reply = st.write_stream(stream_reply(messages, temperature))
         st.session_state.companion_messages.append({"role": "assistant", "content": reply})
 
 
