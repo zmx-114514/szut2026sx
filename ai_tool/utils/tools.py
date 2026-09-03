@@ -64,6 +64,13 @@ def get_weather(city: str) -> str:
         return f"解析 {city} 天气数据失败：{e}"
 
 
+@tool
+def recognize_image_tool(image_url: str, question: str = "请详细描述这张图片的内容") -> str:
+    """识别图片内容。image_url 为图片的 URL 或本地文件路径。当需要分析、描述或理解图片时调用此工具。"""
+    from image_recognition import recognize_image
+    return recognize_image(image_url, question)
+
+
 web_search = TavilySearch()
 
 tools = [get_current_date, get_weather, web_search]

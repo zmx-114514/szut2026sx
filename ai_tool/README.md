@@ -4,7 +4,7 @@
 
 ## 项目功能
 
-本项目包含三个 Streamlit 应用：
+本项目包含四个 Streamlit 应用：
 
 ### 1. AI 厨房助手 (`main.py`)
 - 上传食材照片，AI 识别食材并推荐食谱
@@ -21,20 +21,29 @@
 - 流式对话，回复自然有温度
 - 倾听与陪伴，提供情感支持（侧边栏可调回复风格、一键清空记录）
 
+### 4. 看图搜索 Agent (`vision_app.py`)
+- 上传图片或输入图片 URL，视觉模型识别图片内容
+- Agent 自动调用联网搜索工具补充最新知识
+- 工具调用过程实时可视化（st.status 展示思考链路）
+
 ## 项目结构
 
 ```
 ai_tool/
-├── app.py               # 统一入口（侧边栏切换三个应用）
+├── app.py               # 统一入口（侧边栏切换四个应用）
 ├── main.py              # AI 厨房助手 Streamlit 应用
 ├── calendar_app.py      # 智能万年历 Streamlit 应用
 ├── companion_app.py     # AI 伴侣 Streamlit 应用
+├── vision_app.py        # 看图搜索 Agent Streamlit 应用
+├── image_agent.py       # 看图+联网搜索 Agent 定义
+├── image_recognition.py # 视觉模型图片识别
 ├── test.py              # Agent 工具链测试
 ├── utils/
 │   ├── __init__.py
 │   ├── agent.py         # LangGraph Agent 定义
 │   ├── model.py         # 聊天模型初始化
-│   ├── tools.py         # 工具集合（日期、天气、搜索）
+│   ├── vl_model.py      # 视觉模型初始化
+│   ├── tools.py         # 工具集合（日期、天气、搜索、识图）
 │   ├── send_msg.py      # 流式消息发送
 │   └── upload.py        # 图片上传服务
 ├── .env                 # 环境变量（不提交）
@@ -56,9 +65,10 @@ uv run streamlit run app.py
 uv run streamlit run main.py            # AI 厨房助手
 uv run streamlit run calendar_app.py    # 智能万年历
 uv run streamlit run companion_app.py   # AI 伴侣
+uv run streamlit run vision_app.py      # 看图搜索 Agent
 ```
 
-> 统一入口 `app.py` 通过左侧侧边栏在三个应用间切换。
+> 统一入口 `app.py` 通过左侧侧边栏在四个应用间切换。
 
 ## 环境变量
 
@@ -72,3 +82,6 @@ uv run streamlit run companion_app.py   # AI 伴侣
 | `BEEIMG_API_BASE` | 图床 API 地址 |
 | `BEEIMG_STORAGE_ID` | 图床存储 ID |
 | `BEEIMG_TOKEN` | 图床访问令牌 |
+| `VL_API_KEY` | 视觉模型 API 密钥 |
+| `VL_BASE_URL` | 视觉模型 API 地址 |
+| `VL_MODEL_NAME` | 视觉模型名称 |

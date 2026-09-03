@@ -1,9 +1,10 @@
-"""统一入口 UI：整合 AI 厨房助手、智能万年历与 AI 伴侣。"""
+"""统一入口 UI：整合 AI 厨房助手、智能万年历、AI 伴侣与看图搜索 Agent。"""
 import streamlit as st
 
 from main import run_app as run_kitchen_app
 from calendar_app import run_app as run_calendar_app
 from companion_app import run_app as run_companion_app
+from vision_app import run_app as run_vision_app
 
 st.set_page_config(page_title="AI 智能助手", page_icon="🤖", layout="centered")
 
@@ -12,7 +13,7 @@ st.caption("苏州工学院 2026 级 25 届暑期实训团队作业")
 
 app = st.sidebar.selectbox(
     "选择应用",
-    ["🏠 主页", "🍳 AI 厨房助手", "📅 智能万年历", "💗 AI 伴侣"],
+    ["🏠 主页", "🍳 AI 厨房助手", "📅 智能万年历", "💗 AI 伴侣", "🔍 看图搜索"],
 )
 
 if app == "🏠 主页":
@@ -36,6 +37,11 @@ if app == "🏠 主页":
         st.write("- 农历/节气/节日")
         st.write("- 实时天气查询")
         st.write("- AI 日期问答")
+        st.markdown("### 🔍 看图搜索 Agent")
+        st.write("上传图片或输入 URL，AI 看图并联网搜索相关知识。")
+        st.write("- 视觉模型识图")
+        st.write("- 联网搜索资讯")
+        st.write("- Agent 工具调用过程可视化")
     st.divider()
     st.info("请在左侧选择要使用的应用。")
 elif app == "🍳 AI 厨房助手":
@@ -44,3 +50,5 @@ elif app == "📅 智能万年历":
     run_calendar_app()
 elif app == "💗 AI 伴侣":
     run_companion_app()
+elif app == "🔍 看图搜索":
+    run_vision_app()
