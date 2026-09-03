@@ -8,11 +8,13 @@ load_dotenv()
 
 from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
+from models import resolve_model
 from utils.tools import recognize_image_tool, web_search
 
-# 搜索推理用文本模型（独立于厨房助手的视觉模型，关闭思考模式保证输出干净）
+# 搜索推理用文本模型（独立于厨房助手的视觉模型），按 .env 的 OPENAI_MODEL 选择，关闭思考模式保证输出干净
+_model_name = resolve_model(os.getenv("OPENAI_MODEL", "Qwen/Qwen3.5-4B"))
 search_model = ChatOpenAI(
-    model="Qwen/Qwen3.5-4B",
+    model=_model_name,
     base_url=os.getenv("OPENAI_API_BASE"),
     api_key=os.getenv("OPENAI_API_KEY"),
     extra_body={"enable_thinking": False},

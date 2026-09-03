@@ -30,26 +30,24 @@
 
 ```
 ai_tool/
-├── app.py               # 主页（Streamlit Multipage App 入口）
-├── pages/               # 各应用页面（侧边栏自动导航）
-│   ├── 1_🍳_AI厨房助手.py
-│   ├── 2_📅_智能万年历.py
-│   ├── 3_💗_AI伴侣.py
-│   └── 4_🔍_看图搜索.py
-├── main.py              # AI 厨房助手应用逻辑
+├── app.py               # 主入口（st.navigation 动态导航 + 页面异步加载）
+├── main.py              # AI 厨房助手应用逻辑（侧边栏含其他应用入口）
 ├── calendar_app.py      # 智能万年历 Streamlit 应用
 ├── companion_app.py     # AI 伴侣 Streamlit 应用
 ├── vision_app.py        # 看图搜索 Agent Streamlit 应用
 ├── image_agent.py       # 看图+联网搜索 Agent 定义
 ├── image_recognition.py # 视觉模型图片识别
+├── models/              # 模型别名（qwen3/dsv3/dsv4f，每个模型一个文件）
 ├── test.py              # Agent 工具链测试
 ├── utils/
 │   ├── __init__.py
-│   ├── agent.py         # LangGraph Agent 定义
-│   ├── model.py         # 聊天模型初始化
+│   ├── agent.py         # LangGraph Agent 定义（懒加载 + 双检锁）
+│   ├── model.py         # 聊天模型初始化（懒加载 + 双检锁）
 │   ├── vl_model.py      # 视觉模型初始化
 │   ├── tools.py         # 工具集合（日期、天气、搜索、识图）
 │   ├── send_msg.py      # 流式消息发送
+│   ├── prewarm.py       # 进程级后台预热管理
+│   ├── pageref.py       # 页面引用注册表（st.switch_page 跳转）
 │   └── upload.py        # 图片上传服务
 ├── .env                 # 环境变量（不提交）
 ├── pyproject.toml
@@ -63,7 +61,7 @@ ai_tool/
 # 安装依赖
 uv sync
 
-# 运行主页（推荐，左侧侧边栏自动导航各应用）
+# 运行主页（推荐，左侧侧边栏导航各应用）
 uv run streamlit run app.py
 
 # 或直接运行单个应用（独立窗口）
@@ -73,7 +71,7 @@ uv run streamlit run companion_app.py   # AI 伴侣
 uv run streamlit run vision_app.py      # 看图搜索 Agent
 ```
 
-> 采用 Streamlit Multipage App 模式，`app.py` 为主页，`pages/` 目录下每个文件对应一个应用页面，左侧侧边栏自动生成导航链接。
+> 采用 `st.navigation` 动态导航，`app.py` 为唯一入口；重型模块由 `utils/prewarm.py` 后台异步导入，页面先渲染、就绪后自动呈现。
 
 ## 环境变量
 

@@ -13,6 +13,20 @@ def run_app():
     st.title("AI厨房助手")
     st.write("智能厨房助手，你可以上传你的食材照片，我帮你推荐一些食谱。")
 
+    # ---------- 侧边栏：其他应用入口 ----------
+    from utils.pageref import get
+
+    with st.sidebar:
+        st.header("🧰 更多应用")
+        for key, label in (
+            ("calendar", "📅 智能万年历"),
+            ("vision", "🔍 看图搜索"),
+            ("companion", "💗 AI 伴侣"),
+        ):
+            page = get(key)
+            if page and st.button(label, use_container_width=True, key=f"nav_{key}"):
+                st.switch_page(page)
+
     if 'thread_id' not in st.session_state:
         st.session_state.thread_id = "session_" + str(uuid4())
 

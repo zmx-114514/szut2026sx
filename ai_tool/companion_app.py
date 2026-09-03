@@ -5,6 +5,8 @@ import openai
 import streamlit as st
 from dotenv import load_dotenv
 
+from models import resolve_model
+
 load_dotenv()
 
 # ---------- 人设定义 ----------
@@ -56,7 +58,7 @@ PERSONAS = {
     },
 }
 
-MODEL_NAME = "Qwen/Qwen3.5-4B"
+MODEL_NAME = resolve_model(os.getenv("OPENAI_MODEL", "Qwen/Qwen3.5-4B"))
 
 
 def _get_client():
